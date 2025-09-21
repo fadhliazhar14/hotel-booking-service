@@ -1,0 +1,30 @@
+package fadhli.hotel_booking_service.repository;
+
+import fadhli.hotel_booking_service.entity.RoomAmenity;
+import lombok.NonNull;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface RoomAmenityRepository extends JpaRepository<RoomAmenity, Long> {
+    @Query("SELECT ra FROM RoomAmenity ra WHERE ra.room.id = :roomId")
+    List<RoomAmenity> findByRoomId(@NonNull Long roomId);
+
+    @Query("SELECT ra FROM RoomAmenity ra WHERE ra.amenityType.id = :amenityTypeId")
+    List<RoomAmenity> findByAmenityTypeId(@NonNull Long amenityTypeId);
+
+    @Query("SELECT CASE WHEN COUNT(ra) > 0 THEN true ELSE false END FROM RoomAmenity ra WHERE ra.amenityType.id = :amenityTypeId AND ra.room.id = :roomId")
+    boolean existsByAmenityTypeIdAndRoomId(@Param("amenityTypeId") Long amenityTypeId, @Param("roomId") Long roomId);
+
+    @Query("SELECT CASE WHEN COUNT(ra) > 0 THEN true ELSE false END FROM RoomAmenity ra WHERE ra.room.id = :roomId")
+    boolean existsByRoomId(@NonNull Long roomId);
+
+    @Modifying
+    @Query("DELETE FROM RoomAmenity ra WHERE ra.room.id = :roomId")
+    void deleteAllByRoomId(@Param("roomId") @NonNull Long roomId);
+}
