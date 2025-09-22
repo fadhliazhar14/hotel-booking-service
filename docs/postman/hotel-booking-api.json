@@ -1,0 +1,404 @@
+{
+    "info": {
+        "name": "Hotel Booking Service API",
+        "description": "Complete API collection for Hotel Booking Service Spring Boot application",
+        "version": "1.0.0",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "auth": {
+        "type": "noauth"
+    },
+    "event": [
+        {
+            "listen": "prerequest",
+            "script": {
+                "type": "text/javascript",
+                "exec": [
+                    "// Global pre-request script",
+                    "pm.globals.set('baseUrl', 'http://localhost:8080');",
+                    "pm.globals.set('timestamp', new Date().toISOString());"
+                ]
+            }
+        },
+        {
+            "listen": "test",
+            "script": {
+                "type": "text/javascript",
+                "exec": [
+                    "// Global test script",
+                    "pm.test('Response should be successful', function () {",
+                    "    pm.response.to.have.status.oneOf([200, 201, 204]);",
+                    "});",
+                    "",
+                    "pm.test('Response should have proper JSON structure', function () {",
+                    "    const response = pm.response.json();",
+                    "    pm.expect(response).to.have.property('success');",
+                    "    pm.expect(response).to.have.property('statusCode');",
+                    "    pm.expect(response).to.have.property('message');",
+                    "});"
+                ]
+            }
+        }
+    ],
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "http://localhost:8080",
+            "type": "string"
+        }
+    ],
+    "item": [
+        {
+            "name": "Room Management",
+            "item": [
+                {
+                    "name": "Get All Rooms",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/rooms?page=0&size=20&sort=id&direction=desc",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["api", "rooms"],
+                            "query": [
+                                {
+                                    "key": "page",
+                                    "value": "0",
+                                    "description": "Page number (0-based)"
+                                },
+                                {
+                                    "key": "size",
+                                    "value": "20",
+                                    "description": "Number of items per page"
+                                },
+                                {
+                                    "key": "sort",
+                                    "value": "id",
+                                    "description": "Sort field"
+                                },
+                                {
+                                    "key": "direction",
+                                    "value": "desc",
+                                    "description": "Sort direction (asc/desc)"
+                                },
+                                {
+                                    "key": "search",
+                                    "value": "",
+                                    "description": "Search term",
+                                    "disabled": true
+                                }
+                            ]
+                        },
+                        "description": "Retrieve all rooms with pagination and search functionality"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Room by ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/rooms/1",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["api", "rooms", "1"]
+                        },
+                        "description": "Get specific room details by ID"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Create New Room",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"roomNumber\": \"101\",\n  \"roomType\": \"DELUXE\",\n  \"capacity\": 2,\n  \"pricePerNight\": 750000,\n  \"description\": \"Deluxe room with city view\",\n  \"status\": \"AVAILABLE\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/rooms",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["api", "rooms"]
+                        },
+                        "description": "Create a new room in the hotel"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Room",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"roomNumber\": \"101\",\n  \"roomType\": \"DELUXE\",\n  \"capacity\": 2,\n  \"pricePerNight\": 800000,\n  \"description\": \"Updated deluxe room with city view\",\n  \"status\": \"AVAILABLE\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/rooms/1",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["api", "rooms", "1"]
+                        },
+                        "description": "Update existing room information"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete Room",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/rooms/1",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["api", "rooms", "1"]
+                        },
+                        "description": "Delete a room from the system"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Check Room Availability",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"checkInDate\": \"2024-01-15\",\n  \"checkOutDate\": \"2024-01-17\",\n  \"guests\": 2,\n  \"roomType\": \"DELUXE\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/rooms/available-room",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["api", "rooms", "available-room"]
+                        },
+                        "description": "Check room availability for specific dates"
+                    },
+                    "response": []
+                }
+            ],
+            "description": "All endpoints related to room management"
+        },
+        {
+            "name": "Booking Management",
+            "item": [
+                {
+                    "name": "Get All Bookings",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/bookings?page=0&size=20&sort=id&direction=desc",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["api", "bookings"],
+                            "query": [
+                                {
+                                    "key": "page",
+                                    "value": "0"
+                                },
+                                {
+                                    "key": "size",
+                                    "value": "20"
+                                },
+                                {
+                                    "key": "sort",
+                                    "value": "id"
+                                },
+                                {
+                                    "key": "direction",
+                                    "value": "desc"
+                                }
+                            ]
+                        },
+                        "description": "Get all bookings with pagination"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Booking by ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/bookings/1",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["api", "bookings", "1"]
+                        },
+                        "description": "Get specific booking by ID"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Create New Booking",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"roomId\": 1,\n  \"customerName\": \"John Doe\",\n  \"customerEmail\": \"john.doe@email.com\",\n  \"customerPhone\": \"+62812345678\",\n  \"checkInDate\": \"2024-01-15\",\n  \"checkOutDate\": \"2024-01-17\",\n  \"totalGuests\": 2,\n  \"specialRequests\": \"Late check-in\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/bookings",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["api", "bookings"]
+                        },
+                        "description": "Create a new booking"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Booking",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"roomId\": 1,\n  \"customerName\": \"John Doe Updated\",\n  \"customerEmail\": \"john.doe.updated@email.com\",\n  \"customerPhone\": \"+62812345678\",\n  \"checkInDate\": \"2024-01-15\",\n  \"checkOutDate\": \"2024-01-18\",\n  \"totalGuests\": 2,\n  \"specialRequests\": \"Late check-in and breakfast\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/bookings/1",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["api", "bookings", "1"]
+                        },
+                        "description": "Update existing booking"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Booking Status",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"status\": \"CONFIRMED\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/bookings/1",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["api", "bookings", "1"]
+                        },
+                        "description": "Update booking status only"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete Booking",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/bookings/1",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["api", "bookings", "1"]
+                        },
+                        "description": "Cancel/delete a booking"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Add Service to Booking",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"serviceTypeId\": 1,\n  \"quantity\": 2,\n  \"specialInstructions\": \"Extra towels\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/bookings/1/services",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["api", "bookings", "1", "services"]
+                        },
+                        "description": "Add additional service to existing booking"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Remove Service from Booking",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/bookings/1/services/1",
+                            "host": ["{{baseUrl}}"],
+                            "path": ["api", "bookings", "1", "services", "1"]
+                        },
+                        "description": "Remove service from booking"
+                    },
+                    "response": []
+                }
+            ],
+            "description": "All endpoints related to booking management"
+        }
+    ]
+}

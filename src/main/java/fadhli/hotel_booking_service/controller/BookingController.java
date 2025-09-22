@@ -67,16 +67,6 @@ public ResponseEntity<ApiResponse<PageResponseDto<BookingResponseDto>>> getBooki
         return ResponseEntity.created(location).body(response);
     }
 
-    @PutMapping("/{bookingId}")
-    public ResponseEntity<ApiResponse<BookingResponseDto>> updateBooking(
-            @PathVariable Long bookingId,
-            @Valid @RequestBody BookingRequestDto request) {
-        BookingResponseDto updatedBooking = bookingService.update(bookingId, request);
-        ApiResponse<BookingResponseDto> response = ApiResponse.success("Booking updated successfully", updatedBooking);
-
-        return ResponseEntity.ok(response);
-    }
-
     @PatchMapping("/{bookingId}")
     public ResponseEntity<ApiResponse<BookingResponseDto>> updateBookingStatus(
             @PathVariable Long bookingId,

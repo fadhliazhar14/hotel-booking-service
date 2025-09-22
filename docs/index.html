@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booking Service - Dokumentasi Training</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <meta name="description" content="Dokumentasi lengkap untuk Hotel Booking Service Spring Boot Application">
+    <meta name="keywords" content="Spring Boot, Java, Hotel Booking, REST API, Documentation">
+    <meta name="author" content="Tim Training Development">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1>🏨 Hotel Booking Service</h1>
+            <p class="subtitle">Panduan Training & Implementasi Spring Boot Application</p>
+            <div style="margin-top: 1rem;">
+                <button class="btn btn-success" onclick="printDoc()">📄 Print Documentation</button>
+                <input type="text" id="search-input" placeholder="🔍 Cari dokumentasi..." style="margin-left: 1rem; padding: 0.5rem; border-radius: 5px; border: none;">
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <ul>
+                <li><a href="#overview">📋 Overview</a></li>
+                <li><a href="#tools">🛠️ Tools Required</a></li>
+                <li><a href="#setup">⚙️ Setup & Installation</a></li>
+                <li><a href="#architecture">🏗️ Architecture</a></li>
+                <li><a href="#database">🗄️ Database</a></li>
+                <li><a href="#api-endpoints">🚀 API Endpoints</a></li>
+                <li><a href="#testing">🧪 Testing</a></li>
+                <li><a href="#deployment">🚢 Deployment</a></li>
+                <li><a href="#troubleshooting">🔧 Troubleshooting</a></li>
+                <li><a href="#best-practices">📚 Best Practices</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            
+            <!-- Overview Section -->
+            <section id="overview" class="section">
+                <div class="section-header">
+                    <h2>📋 Overview</h2>
+                    <p>Pengenalan dan gambaran umum aplikasi Hotel Booking Service</p>
+                </div>
+                <div class="section-content">
+                    <div class="card-grid">
+                        <div class="card">
+                            <span class="icon">🎯</span>
+                            <h3>Tujuan Training</h3>
+                            <ul class="feature-list">
+                                <li>Memahami arsitektur Spring Boot</li>
+                                <li>Implementasi REST API dengan best practices</li>
+                                <li>Database integration menggunakan JPA/Hibernate</li>
+                                <li>Error handling dan validation</li>
+                                <li>Testing dan deployment strategies</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <span class="icon">💼</span>
+                            <h3>Business Domain</h3>
+                            <p>Aplikasi Hotel Booking Service menangani:</p>
+                            <ul class="feature-list">
+                                <li>Manajemen kamar hotel</li>
+                                <li>Sistem booking/reservasi</li>
+                                <li>Room amenities management</li>
+                                <li>Service types dan booking services</li>
+                                <li>Status tracking pemesanan</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <span class="icon">🚀</span>
+                            <h3>Tech Stack</h3>
+                            <ul class="feature-list">
+                                <li>Spring Boot 3.5.5</li>
+                                <li>Java 21</li>
+                                <li>Spring Data JPA</li>
+                                <li>MySQL Database</li>
+                                <li>Maven Build Tool</li>
+                                <li>Lombok for boilerplate reduction</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <strong>📌 Important Note:</strong> Dokumentasi ini dirancang sebagai panduan lengkap untuk trainer dan peserta training. Pastikan untuk mengikuti setiap step secara berurutan.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tools Required Section -->
+            <section id="tools" class="section">
+                <div class="section-header">
+                    <h2>🛠️ Tools Required</h2>
+                    <p>Tools dan software yang diperlukan untuk development</p>
+                </div>
+                <div class="section-content">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Tool</th>
+                                    <th>Version</th>
+                                    <th>Purpose</th>
+                                    <th>Download Link</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Java JDK</strong></td>
+                                    <td>21 atau higher</td>
+                                    <td>Runtime environment untuk aplikasi Java</td>
+                                    <td><a href="https://adoptium.net/" class="btn btn-primary">Download</a></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>IntelliJ IDEA</strong></td>
+                                    <td>2023.3+</td>
+                                    <td>IDE untuk development Java/Spring Boot</td>
+                                    <td><a href="https://www.jetbrains.com/idea/" class="btn btn-primary">Download</a></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>MySQL</strong></td>
+                                    <td>8.0+</td>
+                                    <td>Database server</td>
+                                    <td><a href="https://dev.mysql.com/downloads/" class="btn btn-primary">Download</a></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Maven</strong></td>
+                                    <td>3.6+</td>
+                                    <td>Build automation tool</td>
+                                    <td><a href="https://maven.apache.org/download.cgi" class="btn btn-primary">Download</a></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Postman</strong></td>
+                                    <td>Latest</td>
+                                    <td>API testing dan documentation</td>
+                                    <td><a href="https://www.postman.com/" class="btn btn-primary">Download</a></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Git</strong></td>
+                                    <td>2.30+</td>
+                                    <td>Version control system</td>
+                                    <td><a href="https://git-scm.com/" class="btn btn-primary">Download</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="alert alert-warning">
+                        <strong>⚠️ Catatan Penting:</strong>
+                        <ul style="margin: 0.5rem 0;">
+                            <li>Pastikan JAVA_HOME environment variable sudah diset</li>
+                            <li>Pastikan Maven sudah ada di system PATH</li>
+                            <li>MySQL server harus running di port default 3306</li>
+                        </ul>
+                    </div>
+
+                    <h3>📋 Pre-Installation Checklist</h3>
+                    <div class="code-block">
+                        <div class="code-header">Terminal Commands untuk Verifikasi</div>
+                        <pre><code># Check Java version
+java -version
+javac -version
+
+# Check Maven version  
+mvn -version
+
+# Check MySQL connection
+mysql --version
+
+# Check Git installation
+git --version</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Setup & Installation Section -->
+            <section id="setup" class="section">
+                <div class="section-header">
+                    <h2>⚙️ Setup & Installation</h2>
+                    <p>Langkah-langkah setup project dari awal hingga running</p>
+                </div>
+                <div class="section-content">
+                    <h3>1. 📁 Clone atau Setup Project</h3>
+                    <div class="code-block">
+                        <div class="code-header">Git Commands</div>
+                        <pre><code># Clone project (jika sudah ada repository)
+git clone &lt;repository-url&gt;
+cd hotel-booking-service
+
+# Atau buat project baru dari Spring Initializr
+# https://start.spring.io/</code></pre>
+                    </div>
+
+                    <h3>2. 🗄️ Database Setup</h3>
+                    <div class="code-block">
+                        <div class="code-header">MySQL Setup Commands</div>
+                        <pre><code># Login to MySQL
+mysql -u root -p
+
+# Buat database baru
+CREATE DATABASE tutorial_spring;
+
+# Grant permissions (optional)
+GRANT ALL PRIVILEGES ON tutorial_spring.* TO 'root'@'localhost';
+FLUSH PRIVILEGES;
+
+# Exit MySQL
+exit;</code></pre>
+                    </div>
+
+                    <h3>3. ⚙️ Configuration Setup</h3>
+                    <p>Update file <code>application.properties</code>:</p>
+                    <div class="code-block">
+                        <div class="code-header">src/main/resources/application.properties</div>
+                        <pre><code><span class="comment"># Application Configuration</span>
+<span class="keyword">spring.application.name</span>=HotelBookingService
+
+<span class="comment"># Database Configuration</span>
+<span class="keyword">spring.datasource.url</span>=jdbc:mysql://localhost:3306/tutorial_spring
+<span class="keyword">spring.datasource.username</span>=root
+<span class="keyword">spring.datasource.password</span>=your_password_here
+<span class="keyword">spring.datasource.driver-class-name</span>=com.mysql.cj.jdbc.Driver
+
+<span class="comment"># JPA Configuration</span>
+<span class="keyword">spring.jpa.hibernate.ddl-auto</span>=update
+<span class="keyword">spring.jpa.show-sql</span>=true
+<span class="keyword">spring.jpa.properties.hibernate.dialect</span>=org.hibernate.dialect.MySQLDialect
+<span class="keyword">spring.jpa.properties.hibernate.format_sql</span>=true
+
+<span class="comment"># Server Configuration</span>
+<span class="keyword">server.port</span>=8080
+
+<span class="comment"># Logging Configuration</span>
+<span class="keyword">logging.level.com.zaxxer.hikari.HikariConfig</span>=DEBUG
+<span class="keyword">logging.level.org.springframework.web</span>=DEBUG</code></pre>
+                    </div>
+
+                    <h3>4. 🏗️ Build dan Run Application</h3>
+                    <div class="code-block">
+                        <div class="code-header">Maven Commands</div>
+                        <pre><code># Clean dan compile project
+mvn clean compile
+
+# Run tests
+mvn test
+
+# Package aplikasi
+mvn clean package
+
+# Run aplikasi via Maven
+mvn spring-boot:run
+
+# Atau run via Java
+java -jar target/hotel-booking-service-0.0.1-SNAPSHOT.jar</code></pre>
+                    </div>
+
+                    <div class="alert alert-success">
+                        <strong>✅ Sukses!</strong> Jika setup berhasil, aplikasi akan running di <code>http://localhost:8080</code>
+                    </div>
+
+                    <h3>5. 🧪 Verifikasi Setup</h3>
+                    <div class="code-block">
+                        <div class="code-header">Testing API Endpoints</div>
+                        <pre><code># Check application health (jika ada actuator)
+curl http://localhost:8080/actuator/health
+
+# Test basic API endpoint
+curl http://localhost:8080/api/rooms
+
+# Check database connection via aplikasi logs</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Architecture Section -->
+            <section id="architecture" class="section">
+                <div class="section-header">
+                    <h2>🏗️ Architecture</h2>
+                    <p>Arsitektur aplikasi dan pola desain yang digunakan</p>
+                </div>
+                <div class="section-content">
+                    <h3>🏛️ Layered Architecture</h3>
+                    <div class="architecture-diagram">
+                        <div class="layer controller">
+                            <h4>🎮 Controller Layer</h4>
+                            <p>REST API endpoints, request/response handling, validation</p>
+                        </div>
+                        <div class="layer service">
+                            <h4>⚡ Service Layer</h4>
+                            <p>Business logic, transaction management, data processing</p>
+                        </div>
+                        <div class="layer repository">
+                            <h4>📊 Repository Layer</h4>
+                            <p>Data access, JPA repositories, database operations</p>
+                        </div>
+                        <div class="layer database">
+                            <h4>🗄️ Database Layer</h4>
+                            <p>MySQL database, entities, relationships</p>
+                        </div>
+                    </div>
+
+                    <h3>📁 Project Structure</h3>
+                    <div class="code-block">
+                        <div class="code-header">Folder Structure</div>
+                        <pre><code>src/main/java/fadhli/hotel_booking_service/
+├── 📁 controller/           <span class="comment"># REST Controllers</span>
+│   ├── AmenityTypeController.java
+│   ├── BookingController.java
+│   ├── RoomController.java
+│   └── ServiceTypeController.java
+├── 📁 service/              <span class="comment"># Business Logic</span>
+│   ├── AmenityTypeService.java
+│   ├── BookingService.java
+│   ├── RoomService.java
+│   └── ServiceTypeService.java
+├── 📁 repository/           <span class="comment"># Data Access Layer</span>
+│   ├── AmenityTypeRepository.java
+│   ├── BookingRepository.java
+│   ├── RoomRepository.java
+│   └── ServiceTypeRepository.java
+├── 📁 entity/               <span class="comment"># Database Entities</span>
+│   ├── Booking.java
+│   ├── Room.java
+│   └── ...
+├── 📁 dto/                  <span class="comment"># Data Transfer Objects</span>
+│   ├── booking/
+│   ├── room/
+│   ├── common/
+│   └── mapper/
+├── 📁 util/                 <span class="comment"># Utility Classes</span>
+│   └── ApiResponse.java
+└── HotelBookingServiceApplication.java</code></pre>
+                    </div>
+
+                    <h3>🔄 Data Flow</h3>
+                    <div class="card-grid">
+                        <div class="card">
+                            <span class="icon">1️⃣</span>
+                            <h3>Request</h3>
+                            <p>Client mengirim HTTP request ke Controller endpoint</p>
+                        </div>
+                        <div class="card">
+                            <span class="icon">2️⃣</span>
+                            <h3>Validation</h3>
+                            <p>Controller melakukan validasi input menggunakan Bean Validation</p>
+                        </div>
+                        <div class="card">
+                            <span class="icon">3️⃣</span>
+                            <h3>Business Logic</h3>
+                            <p>Service layer memproses business logic dan rules</p>
+                        </div>
+                        <div class="card">
+                            <span class="icon">4️⃣</span>
+                            <h3>Data Access</h3>
+                            <p>Repository layer mengakses database via JPA/Hibernate</p>
+                        </div>
+                        <div class="card">
+                            <span class="icon">5️⃣</span>
+                            <h3>Response</h3>
+                            <p>Data dikembalikan melalui DTO dan ApiResponse wrapper</p>
+                        </div>
+                    </div>
+
+                    <h3>📋 Design Patterns Used</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Pattern</th>
+                                    <th>Implementation</th>
+                                    <th>Purpose</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Repository Pattern</strong></td>
+                                    <td>JpaRepository interfaces</td>
+                                    <td>Abstract data access layer</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Service Layer Pattern</strong></td>
+                                    <td>@Service classes</td>
+                                    <td>Encapsulate business logic</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>DTO Pattern</strong></td>
+                                    <td>Request/Response DTOs</td>
+                                    <td>Data transfer between layers</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Dependency Injection</strong></td>
+                                    <td>@RequiredArgsConstructor</td>
+                                    <td>Loose coupling between components</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Builder Pattern</strong></td>
+                                    <td>@Builder Lombok</td>
+                                    <td>Object creation with fluent API</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Database Section -->
+            <section id="database" class="section">
+                <div class="section-header">
+                    <h2>🗄️ Database Design</h2>
+                    <p>Schema database dan relationship antar tabel</p>
+                </div>
+                <div class="section-content">
+                    <h3>📊 Entity Relationship Diagram</h3>
+                    <div class="alert alert-info">
+                        <strong>📝 Database Entities:</strong> Room, Booking, BookingService, RoomAmenity, AmenityType, ServiceType
+                    </div>
+
+                    <h3>🏷️ Main Entities</h3>
+                    <div class="card-grid">
+                        <div class="card">
+                            <span class="icon">🏨</span>
+                            <h3>Room</h3>
+                            <ul class="feature-list">
+                                <li>ID, room number, type</li>
+                                <li>Capacity, price per night</li>
+                                <li>Status (available, occupied, maintenance)</li>
+                                <li>Description, amenities</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <span class="icon">📝</span>
+                            <h3>Booking</h3>
+                            <ul class="feature-list">
+                                <li>ID, check-in/check-out dates</li>
+                                <li>Customer information</li>
+                                <li>Total amount, status</li>
+                                <li>Room reference</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <span class="icon">🛎️</span>
+                            <h3>BookingService</h3>
+                            <ul class="feature-list">
+                                <li>ID, service type</li>
+                                <li>Quantity, price</li>
+                                <li>Booking reference</li>
+                                <li>Service details</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3>🔗 Relationships</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Relationship</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Room ↔ Booking</td>
+                                    <td>One-to-Many</td>
+                                    <td>Satu room bisa memiliki banyak booking</td>
+                                </tr>
+                                <tr>
+                                    <td>Booking ↔ BookingService</td>
+                                    <td>One-to-Many</td>
+                                    <td>Satu booking bisa memiliki banyak services</td>
+                                </tr>
+                                <tr>
+                                    <td>Room ↔ RoomAmenity</td>
+                                    <td>One-to-Many</td>
+                                    <td>Satu room bisa memiliki banyak amenities</td>
+                                </tr>
+                                <tr>
+                                    <td>ServiceType ↔ BookingService</td>
+                                    <td>One-to-Many</td>
+                                    <td>Satu service type bisa digunakan banyak booking</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>🔧 Database Configuration</h3>
+                    <div class="code-block">
+                        <div class="code-header">JPA Configuration</div>
+                        <pre><code><span class="comment"># Hibernate DDL Strategy</span>
+<span class="keyword">spring.jpa.hibernate.ddl-auto</span>=update
+
+<span class="comment"># Show SQL queries in logs</span>
+<span class="keyword">spring.jpa.show-sql</span>=true
+<span class="keyword">spring.jpa.properties.hibernate.format_sql</span>=true
+
+<span class="comment"># MySQL specific dialect</span>
+<span class="keyword">spring.jpa.properties.hibernate.dialect</span>=org.hibernate.dialect.MySQLDialect
+
+<span class="comment"># Connection pool settings</span>
+<span class="keyword">spring.datasource.hikari.maximum-pool-size</span>=20
+<span class="keyword">spring.datasource.hikari.minimum-idle</span>=5</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- API Endpoints Section -->
+            <section id="api-endpoints" class="section">
+                <div class="section-header">
+                    <h2>🚀 API Endpoints</h2>
+                    <p>Dokumentasi lengkap REST API endpoints</p>
+                </div>
+                <div class="section-content">
+                    <h3>🏨 Room Management APIs</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Method</th>
+                                    <th>Endpoint</th>
+                                    <th>Description</th>
+                                    <th>Request Body</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="btn btn-success">GET</span></td>
+                                    <td>/api/rooms</td>
+                                    <td>Get all rooms with pagination</td>
+                                    <td>Query params: page, size, sort</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="btn btn-success">GET</span></td>
+                                    <td>/api/rooms/{id}</td>
+                                    <td>Get room by ID</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="btn btn-primary">POST</span></td>
+                                    <td>/api/rooms</td>
+                                    <td>Create new room</td>
+                                    <td>RoomRequestDto</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="btn btn-warning">PUT</span></td>
+                                    <td>/api/rooms/{id}</td>
+                                    <td>Update room</td>
+                                    <td>RoomRequestDto</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="btn btn-danger">DELETE</span></td>
+                                    <td>/api/rooms/{id}</td>
+                                    <td>Delete room</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="btn btn-primary">POST</span></td>
+                                    <td>/api/rooms/available-room</td>
+                                    <td>Check room availability</td>
+                                    <td>RoomAvailabilityRequestDto</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>📋 Booking Management APIs</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Method</th>
+                                    <th>Endpoint</th>
+                                    <th>Description</th>
+                                    <th>Request Body</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="btn btn-success">GET</span></td>
+                                    <td>/api/bookings</td>
+                                    <td>Get all bookings with pagination</td>
+                                    <td>Query params: page, size, sort</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="btn btn-success">GET</span></td>
+                                    <td>/api/bookings/{id}</td>
+                                    <td>Get booking by ID</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="btn btn-primary">POST</span></td>
+                                    <td>/api/bookings</td>
+                                    <td>Create new booking</td>
+                                    <td>BookingRequestDto</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="btn btn-warning">PUT</span></td>
+                                    <td>/api/bookings/{id}</td>
+                                    <td>Update booking</td>
+                                    <td>BookingRequestDto</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="btn btn-warning">PATCH</span></td>
+                                    <td>/api/bookings/{id}</td>
+                                    <td>Update booking status</td>
+                                    <td>BookingStatusUpdateDto</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="btn btn-danger">DELETE</span></td>
+                                    <td>/api/bookings/{id}</td>
+                                    <td>Delete booking</td>
+                                    <td>-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>📄 Sample API Requests</h3>
+                    
+                    <h4>Create Room Request</h4>
+                    <div class="code-block">
+                        <div class="code-header">POST /api/rooms</div>
+                        <pre><code>{
+  <span class="string">"roomNumber"</span>: <span class="string">"101"</span>,
+  <span class="string">"roomType"</span>: <span class="string">"DELUXE"</span>,
+  <span class="string">"capacity"</span>: 2,
+  <span class="string">"pricePerNight"</span>: 750000,
+  <span class="string">"description"</span>: <span class="string">"Deluxe room with city view"</span>,
+  <span class="string">"status"</span>: <span class="string">"AVAILABLE"</span>
+}</code></pre>
+                    </div>
+
+                    <h4>Create Booking Request</h4>
+                    <div class="code-block">
+                        <div class="code-header">POST /api/bookings</div>
+                        <pre><code>{
+  <span class="string">"roomId"</span>: 1,
+  <span class="string">"customerName"</span>: <span class="string">"John Doe"</span>,
+  <span class="string">"customerEmail"</span>: <span class="string">"john.doe@email.com"</span>,
+  <span class="string">"customerPhone"</span>: <span class="string">"+62812345678"</span>,
+  <span class="string">"checkInDate"</span>: <span class="string">"2024-01-15"</span>,
+  <span class="string">"checkOutDate"</span>: <span class="string">"2024-01-17"</span>,
+  <span class="string">"totalGuests"</span>: 2,
+  <span class="string">"specialRequests"</span>: <span class="string">"Late check-in"</span>
+}</code></pre>
+                    </div>
+
+                    <h4>API Response Format</h4>
+                    <div class="code-block">
+                        <div class="code-header">Standard API Response</div>
+                        <pre><code>{
+  <span class="string">"success"</span>: <span class="keyword">true</span>,
+  <span class="string">"statusCode"</span>: 200,
+  <span class="string">"message"</span>: <span class="string">"Success"</span>,
+  <span class="string">"data"</span>: {
+    <span class="comment">// Response data object</span>
+  },
+  <span class="string">"timestamp"</span>: <span class="string">"2024-01-15T10:30:00"</span>
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Testing Section -->
+            <section id="testing" class="section">
+                <div class="section-header">
+                    <h2>🧪 Testing</h2>
+                    <p>Strategy dan implementasi testing untuk aplikasi</p>
+                </div>
+                <div class="section-content">
+                    <h3>🎯 Testing Strategy</h3>
+                    <div class="card-grid">
+                        <div class="card">
+                            <span class="icon">🧪</span>
+                            <h3>Unit Tests</h3>
+                            <ul class="feature-list">
+                                <li>Test individual methods</li>
+                                <li>Mock dependencies</li>
+                                <li>Fast execution</li>
+                                <li>High code coverage</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <span class="icon">🔗</span>
+                            <h3>Integration Tests</h3>
+                            <ul class="feature-list">
+                                <li>Test component interactions</li>
+                                <li>Database integration</li>
+                                <li>API endpoint testing</li>
+                                <li>Real dependencies</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <span class="icon">🚀</span>
+                            <h3>API Testing</h3>
+                            <ul class="feature-list">
+                                <li>End-to-end scenarios</li>
+                                <li>Request/Response validation</li>
+                                <li>Error handling</li>
+                                <li>Performance testing</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3>🛠️ Testing Tools</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Tool</th>
+                                    <th>Purpose</th>
+                                    <th>Usage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>JUnit 5</strong></td>
+                                    <td>Unit testing framework</td>
+                                    <td>@Test annotations, assertions</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Mockito</strong></td>
+                                    <td>Mocking framework</td>
+                                    <td>@Mock, @MockBean annotations</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Spring Boot Test</strong></td>
+                                    <td>Integration testing</td>
+                                    <td>@SpringBootTest, TestContainers</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>WebMvcTest</strong></td>
+                                    <td>Controller testing</td>
+                                    <td>MockMvc for HTTP testing</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Postman</strong></td>
+                                    <td>API testing</td>
+                                    <td>Manual & automated testing</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>📝 Sample Test Implementation</h3>
+                    <div class="code-block">
+                        <div class="code-header">BookingServiceTest.java</div>
+                        <pre><code><span class="annotation">@ExtendWith</span>(MockitoExtension.<span class="keyword">class</span>)
+<span class="keyword">class</span> <span class="type">BookingServiceTest</span> {
+
+    <span class="annotation">@Mock</span>
+    <span class="keyword">private</span> <span class="type">BookingRepository</span> bookingRepository;
+
+    <span class="annotation">@Mock</span>
+    <span class="keyword">private</span> <span class="type">RoomRepository</span> roomRepository;
+
+    <span class="annotation">@InjectMocks</span>
+    <span class="keyword">private</span> <span class="type">BookingService</span> bookingService;
+
+    <span class="annotation">@Test</span>
+    <span class="keyword">void</span> shouldCreateBookingSuccessfully() {
+        <span class="comment">// Given</span>
+        <span class="type">BookingRequestDto</span> request = <span class="keyword">new</span> <span class="type">BookingRequestDto</span>();
+        <span class="comment">// Setup request data...</span>
+
+        <span class="comment">// When</span>
+        when(roomRepository.findById(anyLong())).thenReturn(Optional.of(<span class="keyword">new</span> <span class="type">Room</span>()));
+        when(bookingRepository.save(any(<span class="type">Booking</span>.<span class="keyword">class</span>))).thenReturn(<span class="keyword">new</span> <span class="type">Booking</span>());
+
+        <span class="comment">// Then</span>
+        <span class="type">BookingResponseDto</span> result = bookingService.add(request);
+        assertThat(result).isNotNull();
+        verify(bookingRepository).save(any(<span class="type">Booking</span>.<span class="keyword">class</span>));
+    }
+}</code></pre>
+                    </div>
+
+                    <h3>🏃 Running Tests</h3>
+                    <div class="code-block">
+                        <div class="code-header">Maven Test Commands</div>
+                        <pre><code># Run all tests
+mvn test
+
+# Run specific test class
+mvn test -Dtest=BookingServiceTest
+
+# Run tests with coverage report
+mvn test jacoco:report
+
+# Skip tests during build
+mvn clean package -DskipTests</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Deployment Section -->
+            <section id="deployment" class="section">
+                <div class="section-header">
+                    <h2>🚢 Deployment</h2>
+                    <p>Guide deployment aplikasi ke berbagai environment</p>
+                </div>
+                <div class="section-content">
+                    <h3>🏭 Build untuk Production</h3>
+                    <div class="code-block">
+                        <div class="code-header">Production Build Commands</div>
+                        <pre><code># Create production-ready JAR
+mvn clean package -Dmaven.test.skip=true
+
+# Atau dengan tests
+mvn clean package
+
+# Run production JAR
+java -jar target/hotel-booking-service-0.0.1-SNAPSHOT.jar
+
+# With specific profile
+java -jar -Dspring.profiles.active=prod target/hotel-booking-service-0.0.1-SNAPSHOT.jar</code></pre>
+                    </div>
+
+                    <h3>🐳 Docker Deployment</h3>
+                    <div class="code-block">
+                        <div class="code-header">Dockerfile</div>
+                        <pre><code><span class="keyword">FROM</span> openjdk:21-jdk-slim
+
+<span class="keyword">WORKDIR</span> /app
+
+<span class="keyword">COPY</span> target/hotel-booking-service-0.0.1-SNAPSHOT.jar app.jar
+
+<span class="keyword">EXPOSE</span> 8080
+
+<span class="keyword">CMD</span> [<span class="string">"java"</span>, <span class="string">"-jar"</span>, <span class="string">"app.jar"</span>]</code></pre>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">Docker Commands</div>
+                        <pre><code># Build Docker image
+docker build -t hotel-booking-service .
+
+# Run container
+docker run -p 8080:8080 hotel-booking-service
+
+# Run with environment variables
+docker run -p 8080:8080 \
+  -e SPRING_DATASOURCE_URL=jdbc:mysql://host:3306/db \
+  -e SPRING_DATASOURCE_USERNAME=user \
+  -e SPRING_DATASOURCE_PASSWORD=pass \
+  hotel-booking-service</code></pre>
+                    </div>
+
+                    <h3>☁️ Cloud Deployment Options</h3>
+                    <div class="card-grid">
+                        <div class="card">
+                            <span class="icon">🌩️</span>
+                            <h3>AWS</h3>
+                            <ul class="feature-list">
+                                <li>Elastic Beanstalk</li>
+                                <li>ECS (Container Service)</li>
+                                <li>EC2 instances</li>
+                                <li>RDS for MySQL</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <span class="icon">☁️</span>
+                            <h3>Google Cloud</h3>
+                            <ul class="feature-list">
+                                <li>App Engine</li>
+                                <li>Cloud Run</li>
+                                <li>Compute Engine</li>
+                                <li>Cloud SQL</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <span class="icon">🔵</span>
+                            <h3>Azure</h3>
+                            <ul class="feature-list">
+                                <li>App Service</li>
+                                <li>Container Instances</li>
+                                <li>Virtual Machines</li>
+                                <li>Azure Database</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3>⚙️ Environment Configuration</h3>
+                    <div class="code-block">
+                        <div class="code-header">application-prod.properties</div>
+                        <pre><code><span class="comment"># Production Configuration</span>
+<span class="keyword">server.port</span>=8080
+
+<span class="comment"># Database - Use environment variables</span>
+<span class="keyword">spring.datasource.url</span>=${DATABASE_URL:jdbc:mysql://localhost:3306/hotel_booking}
+<span class="keyword">spring.datasource.username</span>=${DATABASE_USERNAME:root}
+<span class="keyword">spring.datasource.password</span>=${DATABASE_PASSWORD:password}
+
+<span class="comment"># JPA Settings for Production</span>
+<span class="keyword">spring.jpa.hibernate.ddl-auto</span>=validate
+<span class="keyword">spring.jpa.show-sql</span>=false
+
+<span class="comment"># Logging</span>
+<span class="keyword">logging.level.com.fadhli</span>=INFO
+<span class="keyword">logging.level.org.springframework</span>=WARN</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Troubleshooting Section -->
+            <section id="troubleshooting" class="section">
+                <div class="section-header">
+                    <h2>🔧 Troubleshooting</h2>
+                    <p>Common issues dan solusinya</p>
+                </div>
+                <div class="section-content">
+                    <h3>❌ Common Problems & Solutions</h3>
+                    
+                    <div class="alert alert-danger">
+                        <strong>🚨 Database Connection Issues</strong>
+                        <h4>Problem:</h4>
+                        <p><code>java.sql.SQLException: Access denied for user 'root'@'localhost'</code></p>
+                        
+                        <h4>Solutions:</h4>
+                        <ul>
+                            <li>Check MySQL service is running: <code>brew services start mysql</code> (macOS) atau <code>sudo systemctl start mysql</code> (Linux)</li>
+                            <li>Verify username/password di <code>application.properties</code></li>
+                            <li>Grant proper permissions: <code>GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost';</code></li>
+                            <li>Check database exists: <code>CREATE DATABASE tutorial_spring;</code></li>
+                        </ul>
+                    </div>
+
+                    <div class="alert alert-warning">
+                        <strong>⚠️ Port Already in Use</strong>
+                        <h4>Problem:</h4>
+                        <p><code>Port 8080 was already in use</code></p>
+                        
+                        <h4>Solutions:</h4>
+                        <ul>
+                            <li>Kill process using port: <code>lsof -ti:8080 | xargs kill -9</code></li>
+                            <li>Change port di <code>application.properties</code>: <code>server.port=8081</code></li>
+                            <li>Use different profile dengan port berbeda</li>
+                        </ul>
+                    </div>
+
+                    <div class="alert alert-warning">
+                        <strong>⚠️ Build Failures</strong>
+                        <h4>Problem:</h4>
+                        <p>Maven build failing atau dependency issues</p>
+                        
+                        <h4>Solutions:</h4>
+                        <ul>
+                            <li>Clean maven cache: <code>mvn clean</code></li>
+                            <li>Reload dependencies: <code>mvn dependency:resolve</code></li>
+                            <li>Check Java version: <code>java -version</code> (should be 21+)</li>
+                            <li>Verify JAVA_HOME: <code>echo $JAVA_HOME</code></li>
+                        </ul>
+                    </div>
+
+                    <h3>🔍 Debugging Tips</h3>
+                    <div class="code-block">
+                        <div class="code-header">Debug Configuration</div>
+                        <pre><code><span class="comment"># Enable debug logging</span>
+<span class="keyword">logging.level.org.springframework.web</span>=DEBUG
+<span class="keyword">logging.level.com.fadhli.hotel_booking_service</span>=DEBUG
+
+<span class="comment"># Show SQL queries</span>
+<span class="keyword">spring.jpa.show-sql</span>=true
+<span class="keyword">spring.jpa.properties.hibernate.format_sql</span>=true
+
+<span class="comment"># Enable actuator endpoints</span>
+<span class="keyword">management.endpoints.web.exposure.include</span>=health,info,env</code></pre>
+                    </div>
+
+                    <h3>📊 Health Check Endpoints</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Endpoint</th>
+                                    <th>Purpose</th>
+                                    <th>Example Response</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>/actuator/health</td>
+                                    <td>Application health status</td>
+                                    <td>{"status":"UP"}</td>
+                                </tr>
+                                <tr>
+                                    <td>/actuator/info</td>
+                                    <td>Application information</td>
+                                    <td>Build info, version, etc.</td>
+                                </tr>
+                                <tr>
+                                    <td>/actuator/env</td>
+                                    <td>Environment properties</td>
+                                    <td>Configuration values</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>🛠️ Performance Issues</h3>
+                    <div class="card-grid">
+                        <div class="card">
+                            <span class="icon">🐌</span>
+                            <h3>Slow Database Queries</h3>
+                            <ul class="feature-list">
+                                <li>Add database indexes</li>
+                                <li>Optimize JPA queries</li>
+                                <li>Use pagination for large datasets</li>
+                                <li>Enable query caching</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <span class="icon">💾</span>
+                            <h3>Memory Issues</h3>
+                            <ul class="feature-list">
+                                <li>Increase JVM heap size</li>
+                                <li>Monitor memory usage</li>
+                                <li>Fix memory leaks</li>
+                                <li>Use connection pooling</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <span class="icon">⏱️</span>
+                            <h3>High Response Times</h3>
+                            <ul class="feature-list">
+                                <li>Enable compression</li>
+                                <li>Add caching layers</li>
+                                <li>Optimize business logic</li>
+                                <li>Use async processing</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Best Practices Section -->
+            <section id="best-practices" class="section">
+                <div class="section-header">
+                    <h2>📚 Best Practices</h2>
+                    <p>Guidelines dan best practices untuk development</p>
+                </div>
+                <div class="section-content">
+                    <h3>🎯 Code Quality Guidelines</h3>
+                    <div class="card-grid">
+                        <div class="card">
+                            <span class="icon">🧹</span>
+                            <h3>Clean Code</h3>
+                            <ul class="feature-list">
+                                <li>Descriptive variable & method names</li>
+                                <li>Single Responsibility Principle</li>
+                                <li>Avoid magic numbers</li>
+                                <li>Consistent code formatting</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <span class="icon">🔒</span>
+                            <h3>Security</h3>
+                            <ul class="feature-list">
+                                <li>Input validation</li>
+                                <li>SQL injection prevention</li>
+                                <li>Use environment variables for secrets</li>
+                                <li>Implement proper authentication</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <span class="icon">⚡</span>
+                            <h3>Performance</h3>
+                            <ul class="feature-list">
+                                <li>Efficient database queries</li>
+                                <li>Proper exception handling</li>
+                                <li>Caching strategies</li>
+                                <li>Connection pooling</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3>🏗️ Architecture Best Practices</h3>
+                    <div class="alert alert-info">
+                        <strong>🎯 Layered Architecture Benefits:</strong>
+                        <ul style="margin: 0.5rem 0;">
+                            <li><strong>Separation of Concerns:</strong> Each layer has specific responsibility</li>
+                            <li><strong>Testability:</strong> Easy to unit test individual layers</li>
+                            <li><strong>Maintainability:</strong> Changes in one layer don't affect others</li>
+                            <li><strong>Scalability:</strong> Can optimize each layer independently</li>
+                        </ul>
+                    </div>
+
+                    <h3>📝 Code Examples</h3>
+                    <h4>✅ Good Practice - Service Implementation</h4>
+                    <div class="code-block">
+                        <div class="code-header">Good Service Implementation</div>
+                        <pre><code><span class="annotation">@Service</span>
+<span class="annotation">@RequiredArgsConstructor</span>
+<span class="annotation">@Transactional</span>
+<span class="keyword">public class</span> <span class="type">BookingService</span> {
+    
+    <span class="keyword">private final</span> <span class="type">BookingRepository</span> bookingRepository;
+    <span class="keyword">private final</span> <span class="type">RoomRepository</span> roomRepository;
+    <span class="keyword">private final</span> <span class="type">BookingMapper</span> bookingMapper;
+    
+    <span class="keyword">public</span> <span class="type">BookingResponseDto</span> add(<span class="type">BookingRequestDto</span> requestDto) {
+        <span class="comment">// 1. Validate business rules</span>
+        validateBookingRequest(requestDto);
+        
+        <span class="comment">// 2. Check room availability</span>
+        <span class="type">Room</span> room = findAvailableRoom(requestDto.getRoomId());
+        
+        <span class="comment">// 3. Create booking entity</span>
+        <span class="type">Booking</span> booking = bookingMapper.toEntity(requestDto);
+        booking.setRoom(room);
+        booking.calculateTotalAmount();
+        
+        <span class="comment">// 4. Save and return response</span>
+        <span class="type">Booking</span> savedBooking = bookingRepository.save(booking);
+        <span class="keyword">return</span> bookingMapper.toResponseDto(savedBooking);
+    }
+    
+    <span class="keyword">private void</span> validateBookingRequest(<span class="type">BookingRequestDto</span> request) {
+        <span class="keyword">if</span> (request.getCheckInDate().isAfter(request.getCheckOutDate())) {
+            <span class="keyword">throw new</span> <span class="type">ValidationException</span>(<span class="string">"Check-in date must be before check-out date"</span>);
+        }
+    }
+}</code></pre>
+                    </div>
+
+                    <h4>❌ Bad Practice Example</h4>
+                    <div class="code-block">
+                        <div class="code-header">Bad Practice - Avoid This</div>
+                        <pre><code><span class="comment">// ❌ Bad: Controller with business logic</span>
+<span class="annotation">@PostMapping</span>
+<span class="keyword">public</span> <span class="type">ResponseEntity</span> createBooking(<span class="type">BookingRequest</span> req) {
+    <span class="comment">// Business logic in controller - BAD!</span>
+    <span class="keyword">if</span> (req.checkIn.after(req.checkOut)) {
+        <span class="keyword">return</span> <span class="type">ResponseEntity</span>.badRequest().body(<span class="string">"Invalid dates"</span>);
+    }
+    
+    <span class="comment">// Direct database access - BAD!</span>
+    <span class="type">Booking</span> b = <span class="keyword">new</span> <span class="type">Booking</span>();
+    b.setCustomer(req.customer);
+    em.persist(b);
+    
+    <span class="keyword">return</span> <span class="type">ResponseEntity</span>.ok(b);
+}</code></pre>
+                    </div>
+
+                    <h3>🎯 Development Workflow</h3>
+                    <div class="card-grid">
+                        <div class="card">
+                            <span class="icon">1️⃣</span>
+                            <h3>Planning</h3>
+                            <ul class="feature-list">
+                                <li>Define requirements clearly</li>
+                                <li>Design database schema</li>
+                                <li>Plan API endpoints</li>
+                                <li>Consider error scenarios</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <span class="icon">2️⃣</span>
+                            <h3>Development</h3>
+                            <ul class="feature-list">
+                                <li>Start with entities & repositories</li>
+                                <li>Implement service layer</li>
+                                <li>Add controllers & DTOs</li>
+                                <li>Write tests alongside code</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <span class="icon">3️⃣</span>
+                            <h3>Testing & Deployment</h3>
+                            <ul class="feature-list">
+                                <li>Unit & integration tests</li>
+                                <li>Manual API testing</li>
+                                <li>Code review</li>
+                                <li>Deploy to staging first</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3>📋 Code Review Checklist</h3>
+                    <div class="feature-list">
+                        <li>Is the code following consistent naming conventions?</li>
+                        <li>Are there proper error handling mechanisms?</li>
+                        <li>Is input validation implemented correctly?</li>
+                        <li>Are database transactions handled properly?</li>
+                        <li>Is the code well-documented?</li>
+                        <li>Are security best practices followed?</li>
+                        <li>Is the performance acceptable?</li>
+                        <li>Are tests comprehensive and passing?</li>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Hotel Booking Service Training Documentation</p>
+            <p>📧 Contact: <a href="mailto:training@company.com" style="color: #ecf0f1;">training@company.com</a> | 📞 Support: +62-800-123-4567</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

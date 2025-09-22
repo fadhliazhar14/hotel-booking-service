@@ -77,34 +77,6 @@ public class BookingService {
         return bookingMapper.toResponseDto(savedBooking);
     }
 
-    public BookingResponseDto update(Long bookingId, BookingRequestDto requestDto) {
-        Booking existingBooking = findBookingById(bookingId);
-
-        validateBookingRequest(requestDto);
-
-        // Check if room is changing
-        if (!existingBooking.getRoom().getId().equals(requestDto.getRoomId())) {
-            Room newRoom = findRoomById(requestDto.getRoomId());
-            if (!isRoomAvailable(newRoom, requestDto.getCheckedInDate(), requestDto.getCheckedOutDate())) {
-                throw new BusinessValidationException("New room is not available for the selected dates");
-            }
-            existingBooking.setRoom(newRoom);
-        }
-
-        // Set updated booking
-        existingBooking.setFirstName(requestDto.getFirstName());
-        existingBooking.setLastName(requestDto.getLastName());
-        existingBooking.setCheckedInDate(requestDto.getCheckedInDate());
-        existingBooking.setCheckedOutDate(requestDto.getCheckedOutDate());
-        existingBooking.setAdultCapacity(requestDto.getAdultCapacity());
-        existingBooking.setChildrenCapacity(requestDto.getChildrenCapacity());
-        existingBooking.setTotalAmount(calculateTotalAmount(existingBooking.getRoom().getId(), getNight(existingBooking.getCheckedInDate(), existingBooking.getCheckedOutDate())));
-
-        Booking updatedBooking = bookingRepository.save(existingBooking);
-
-        return bookingMapper.toResponseDto(updatedBooking);
-    }
-
     public BookingResponseDto updateStatus(Long bookingId, BookingStatusUpdateDto statusUpdateDto) {
         Booking booking = findBookingById(bookingId);
 
@@ -217,7 +189,7 @@ public class BookingService {
         LocalDate checkIn = requestDto.getCheckedInDate();
         LocalDate checkOut = requestDto.getCheckedOutDate();
 
-        if (checkIn.isAfter(checkOut) || checkIn.isEqual(checkOut)) {
+        if (checkIn.isAfter(checkOut)) {
             throw new BusinessValidationException("Check-out date must be after check-in date");
         }
 
