@@ -1,9 +1,9 @@
-name: Build & Deploy Docker
+name: Build & Deploy Docker (Java 22)
 
 on:
   push:
     branches:
-      - development
+      - main
 
 jobs:
   build-and-deploy:
@@ -14,18 +14,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2. Setup Java
-      - name: Setup Java
-        uses: actions/setup-java@v3
-        with:
-          distribution: temurin
-          java-version: 22
-
-      # 3. Build JAR
-      - name: Build JAR
-        run: mvn clean package -DskipTests
-
-      # 4. Login ke private registry
+      # 2. Docker login
       - name: Docker login
         uses: docker/login-action@v3
         with:
@@ -33,18 +22,22 @@ jobs:
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
 
-      # 5. Build Docker image
+      # 3. Build Docker image (multi-stage)
       - name: Build Docker image
         run: |
-          IMAGE_NAME=${{ secrets.REGISTRY_URL }}/${{ secrets.REGISTRY_USERNAME }}/app:latest
-          docker build -t $IMAGE_NAME .
+          IMAGE_TAG=${GITHUB_SHA}
+          IMAGE_NAME=${{ secrets.REGISTRY_URL }}/${{ secrets.REGISTRY_USERNAME }}/hotel-booking-service:$IMAGE_TAG
+          docker build --no-cache -t $IMAGE_NAME .
+          docker tag $IMAGE_NAME ${{ secrets.REGISTRY_URL }}/${{ secrets.REGISTRY_USERNAME }}/hotel-booking-service:latest
           echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
 
-      # 6. Push Docker image
+      # 4. Push Docker image
       - name: Push Docker image
-        run: docker push ${{ env.IMAGE_NAME }}
+        run: |
+          docker push ${{ env.IMAGE_NAME }}
+          docker push ${{ secrets.REGISTRY_URL }}/${{ secrets.REGISTRY_USERNAME }}/hotel-booking-service:latest
 
-      # 7. Deploy ke server via SSH
+      # 5. Deploy ke server via SSH
       - name: Deploy to Server
         uses: appleboy/ssh-action@v0.1.10
         with:
@@ -56,6 +49,7 @@ jobs:
             echo ${{ secrets.REGISTRY_PASSWORD }} | docker login ${{ secrets.REGISTRY_URL }} -u ${{ secrets.REGISTRY_USERNAME }} --password-stdin
             echo "Pull image terbaru"
             docker pull ${{ env.IMAGE_NAME }}
+            docker pull ${{ secrets.REGISTRY_URL }}/${{ secrets.REGISTRY_USERNAME }}/hotel-booking-service:latest
             cd /home/deploy/app
             docker compose down
             docker compose up -d
