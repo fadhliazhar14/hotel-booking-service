@@ -1,13 +1,9 @@
-# Stage 1: Build
-FROM maven:3.9.2-eclipse-temurin-22 AS build
+FROM eclipse-temurin:22-jdk
 WORKDIR /app
-COPY pom.xml .
-COPY src ./src
-RUN mvn clean package -DskipTests
 
-# Stage 2: Runtime
-FROM eclipse-temurin:22-jdk-jammy
-WORKDIR /app
-COPY --from=build /app/target/*.jar app.jar
+# Copy JAR hasil build dari runner
+COPY target/*.jar app.jar
+
 EXPOSE 8080
+
 ENTRYPOINT ["java", "-jar", "app.jar"]
