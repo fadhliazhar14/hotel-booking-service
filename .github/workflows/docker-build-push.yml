@@ -1,22 +1,61 @@
-name: Build & Push to Registry
+name: Build & Deploy Docker
 
 on:
   push:
     branches:
-      - development
+      - main
 
 jobs:
-  build-and-push:
+  build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout Repository
+      # 1. Checkout repo
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Log in to Private Registry
-        run: echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login ${{ secrets.REGISTRY_URL }} -u ${{ secrets.REGISTRY_USERNAME }} --password-stdin
+      # 2. Setup Java
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 17
 
-      - name: Build Docker Image
-        run: docker build -t ${{ secrets.REGISTRY_URL }}/myapp:${{ github.sha }} .
+      # 3. Build JAR
+      - name: Build JAR
+        run: mvn clean package -DskipTests
 
-      - name: Push Docker Image
-        run: docker push ${{ secrets.REGISTRY_URL }}/myapp:${{ github.sha }}
+      # 4. Login ke private registry
+      - name: Docker login
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ secrets.REGISTRY_URL }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
+      # 5. Build Docker image
+      - name: Build Docker image
+        run: |
+          IMAGE_NAME=${{ secrets.REGISTRY_URL }}/${{ secrets.REGISTRY_USERNAME }}/app:latest
+          docker build -t $IMAGE_NAME .
+          echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
+
+      # 6. Push Docker image
+      - name: Push Docker image
+        run: docker push ${{ env.IMAGE_NAME }}
+
+      # 7. Deploy ke server via SSH
+      - name: Deploy to Server
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            echo "Login ke private registry di server"
+            echo ${{ secrets.REGISTRY_PASSWORD }} | docker login ${{ secrets.REGISTRY_URL }} -u ${{ secrets.REGISTRY_USERNAME }} --password-stdin
+            echo "Pull image terbaru"
+            docker pull ${{ env.IMAGE_NAME }}
+            cd /home/deploy/app
+            docker compose down
+            docker compose up -d
