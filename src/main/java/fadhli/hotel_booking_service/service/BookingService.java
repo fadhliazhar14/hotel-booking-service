@@ -35,12 +35,13 @@ public class BookingService {
     private final BookingMapper bookingMapper;
     private final BookingServiceMapper bookingServiceMapper;
 
-    private final RoomService roomService;
-
-    public PageResponseDto<BookingResponseDto> findAllWithPagination(PageRequestDto pageRequest) {
+    public PageResponseDto<BookingResponseDto> findAllWithPagination(PageRequestDto pageRequest, String status) {
         Pageable pageable = PageUtil.createPageable(pageRequest);
-
-        Page<Booking> bookingPage = bookingRepository.findAllWithPagination(pageRequest.getSearch(), pageable);
+        Page<Booking> bookingPage = bookingRepository.findAllWithPagination(
+                pageRequest.getSearch(),
+                status,
+                pageable
+        );
 
         List<BookingResponseDto> bookingResponses = bookingPage.getContent().stream()
                 .map(bookingMapper::toResponseDto)

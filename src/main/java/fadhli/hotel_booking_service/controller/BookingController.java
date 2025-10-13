@@ -1,7 +1,5 @@
 package fadhli.hotel_booking_service.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import fadhli.hotel_booking_service.dto.booking.*;
 import fadhli.hotel_booking_service.dto.common.PageRequestDto;
 import fadhli.hotel_booking_service.dto.common.PageResponseDto;
@@ -9,7 +7,6 @@ import fadhli.hotel_booking_service.service.BookingService;
 import fadhli.hotel_booking_service.util.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,12 +21,13 @@ public class BookingController {
     private final BookingService bookingService;
 
     @GetMapping
-public ResponseEntity<ApiResponse<PageResponseDto<BookingResponseDto>>> getBookings(
+    public ResponseEntity<ApiResponse<PageResponseDto<BookingResponseDto>>> getBookings(
         @RequestParam(defaultValue = "0") int page,
         @RequestParam(defaultValue = "20") int size,
         @RequestParam(defaultValue = "id") String sort,
         @RequestParam(defaultValue = "desc") String direction,
-        @RequestParam(required = false) String search) throws JsonProcessingException {
+        @RequestParam(required = false) String search,
+        @RequestParam(required = false) String status) {
 
         PageRequestDto pageRequest = new PageRequestDto();
         pageRequest.setPage(page);
@@ -38,7 +36,7 @@ public ResponseEntity<ApiResponse<PageResponseDto<BookingResponseDto>>> getBooki
         pageRequest.setDirection(direction);
         pageRequest.setSearch(search);
 
-        PageResponseDto<BookingResponseDto> bookings = bookingService.findAllWithPagination(pageRequest);
+        PageResponseDto<BookingResponseDto> bookings = bookingService.findAllWithPagination(pageRequest, status);
         ApiResponse<PageResponseDto<BookingResponseDto>> response = ApiResponse.success("Success", bookings);
 
         return ResponseEntity.ok(response);

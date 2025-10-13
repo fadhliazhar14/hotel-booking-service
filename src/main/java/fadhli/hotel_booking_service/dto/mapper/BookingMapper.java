@@ -3,7 +3,6 @@ package fadhli.hotel_booking_service.dto.mapper;
 import fadhli.hotel_booking_service.dto.booking.BookingRequestDto;
 import fadhli.hotel_booking_service.dto.booking.BookingResponseDto;
 import fadhli.hotel_booking_service.entity.Booking;
-import fadhli.hotel_booking_service.entity.Room;
 import fadhli.hotel_booking_service.model.BookingStatus;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +22,7 @@ public class BookingMapper {
         dto.setChildrenCapacity(booking.getChildrenCapacity());
         dto.setNight(booking.getNight());
         dto.setRoomId(booking.getRoom().getId());
+        dto.setRoomNumber(booking.getRoom().getRoomNumber());
         dto.setBookingStatus(booking.getBookingStatus());
         dto.setCreatedAt(booking.getCreatedAt());
         dto.setUpdatedAt(booking.getUpdatedAt());
