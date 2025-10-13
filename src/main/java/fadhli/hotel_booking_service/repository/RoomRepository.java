@@ -35,8 +35,8 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
                 WHERE b.room_id = r.id
                 AND b.booking_status IN ('BOOKED', 'CHECKED_IN')
                 AND NOT (
-                    b.checked_out_date <= :checkInDate
-                    OR b.checked_in_date >= :checkOutDate
+                    b.checked_out_date < :checkInDate
+                    OR b.checked_in_date > :checkOutDate
                 )
             )
             ORDER BY r.room_price ASC
