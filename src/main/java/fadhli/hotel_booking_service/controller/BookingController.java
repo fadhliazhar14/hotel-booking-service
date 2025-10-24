@@ -54,7 +54,7 @@ public class BookingController {
     @PostMapping
     public ResponseEntity<ApiResponse<BookingResponseDto>> createBooking(@Valid @RequestBody BookingRequestDto request) {
         BookingResponseDto savedBooking = bookingService.add(request);
-        ApiResponse<BookingResponseDto> response = ApiResponse.success(201, "Booking has been created successfully", savedBooking);
+        ApiResponse<BookingResponseDto> response = ApiResponse.success(HttpStatus.CREATED.value(), "Booking has been created successfully", savedBooking);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
